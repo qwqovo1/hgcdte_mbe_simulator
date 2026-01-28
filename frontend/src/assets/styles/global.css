@@ -1,0 +1,36 @@
+/* 全局样式 */
+:root {
+  --primary-color: #409eff;
+  --sidebar-width: 200px;
+  --header-height: 60px;
+  --bg-color: #f5f7fa;
+  --text-color: #303133;
+  --border-color: #dcdfe6;
+}
+
+body {
+  font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+/* 按钮基础样式 */
+.btn {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #66b1ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.4);
+}
