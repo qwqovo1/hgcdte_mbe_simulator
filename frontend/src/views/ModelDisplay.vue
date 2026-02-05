@@ -3,6 +3,13 @@
     <Sidebar />
     <main class="main-content">
       <div class="page-container">
+        <!-- 返回目录按钮：符合 0.618 比例感，圆角矩形 -->
+        <div class="breadcrumb">
+          <button @click="$router.push('/model')" class="btn-back">
+            <span class="icon">⬅</span> 返回模型目录
+          </button>
+        </div>
+
         <h1 class="page-title">模型展示</h1>
         <div class="model-card">
           <div class="card-header">
@@ -46,7 +53,7 @@
 
 <script>
 import Sidebar from '../components/Sidebar.vue'
-import * as THREE from 'three'
+import * as THREE from 'three' // 修正：恢复标准导入
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
@@ -111,7 +118,6 @@ export default {
         const cachedResponse = await cache.match(modelUrl);
 
         if (cachedResponse) {
-          // 命中缓存：直接从本地浏览器硬盘读取模型
           this.cacheHit = true;
           const blob = await cachedResponse.blob();
           const url = URL.createObjectURL(blob);
@@ -120,7 +126,6 @@ export default {
             URL.revokeObjectURL(url);
           });
         } else {
-          // 未命中缓存：从网络下载并存入缓存
           loader.load(
             modelUrl,
             async (gltf) => {
@@ -135,7 +140,6 @@ export default {
           );
         }
       } catch (err) {
-        // 缓存失败的回退方案
         loader.load(modelUrl, (gltf) => this.processModel(gltf));
       }
     },
@@ -179,6 +183,28 @@ export default {
 .layout { display: flex; min-height: 100vh; background-color: #05050a; }
 .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 25px; }
 .page-container { max-width: 1400px; margin: 0 auto; }
+
+/* 按钮设计：圆角矩形，黄金比例长宽感 */
+.breadcrumb { margin-bottom: 20px; }
+.btn-back {
+  background: rgba(22, 22, 37, 0.8);
+  border: 1px solid #2d2d44;
+  color: #00c7ff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-back:hover {
+  background: rgba(0, 199, 255, 0.1);
+  border-color: #00c7ff;
+  transform: translateX(-5px);
+}
+
 .page-title { color: #fff; margin-bottom: 20px; font-weight: 300; }
 .model-card { background: #11111d; border-radius: 12px; border: 1px solid #2d2d44; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .card-header { padding: 15px 25px; background: #161625; border-bottom: 1px solid #2d2d44; display: flex; justify-content: space-between; align-items: center; }
@@ -195,6 +221,7 @@ export default {
 .card-footer { padding: 12px 25px; background: #161625; border-top: 1px solid #2d2d44; }
 .footer-grid { display: flex; justify-content: space-between; color: #6a6a85; font-size: 12px; }
 .btn-mini { background: transparent; border: 1px solid #444466; color: #aaaabf; padding: 5px 12px; border-radius: 4px; cursor: pointer; }
+
 @keyframes spin { 100% { transform: rotate(360deg); } }
 @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
 </style>
