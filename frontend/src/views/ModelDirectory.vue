@@ -15,7 +15,17 @@
             <div class="card-footer-tag">GPU 实时渲染</div>
           </div>
 
-          <!-- 占位入口（可根据需求扩展） -->
+          <!-- 【新增入口】：红外高温计 -->
+          <div class="model-entry-card" @click="goToPyrometer">
+            <div class="card-content">
+              <div class="icon-box">🌡️</div>
+              <h2 class="entry-title">红外高温计 (Pyrometer)</h2>
+              <div class="entry-desc">衬底温度非接触式测量核心组件</div>
+            </div>
+            <div class="card-footer-tag academic-tag">学术级物理模型</div>
+          </div>
+
+          <!-- 占位入口 -->
           <div class="model-entry-card disabled">
             <div class="card-content">
               <div class="icon-box">🛠️</div>
@@ -38,6 +48,10 @@ export default {
   methods: {
     goToPreview() {
       this.$router.push('/model/preview')
+    },
+    // 【新增方法】跳转至高温计页面
+    goToPyrometer() {
+      this.$router.push('/model/pyrometer')
     }
   }
 }
@@ -56,8 +70,6 @@ export default {
   margin-top: 20px;
 }
 
-/* 按钮卡片设计：使用黄金比例 0.618 */
-/* 宽度 320px，高度约 198px (320 * 0.618) */
 .model-entry-card {
   width: 320px;
   height: 198px;
@@ -85,27 +97,10 @@ export default {
   cursor: not-allowed;
 }
 
-.card-content {
-  text-align: center;
-  padding: 20px;
-}
-
-.icon-box {
-  font-size: 32px;
-  margin-bottom: 15px;
-}
-
-.entry-title {
-  color: #fff;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.entry-desc {
-  color: #8888a0;
-  font-size: 13px;
-  line-height: 1.4;
-}
+.card-content { text-align: center; padding: 20px; }
+.icon-box { font-size: 32px; margin-bottom: 15px; }
+.entry-title { color: #fff; font-size: 18px; margin-bottom: 10px; }
+.entry-desc { color: #8888a0; font-size: 13px; line-height: 1.4; }
 
 .card-footer-tag {
   position: absolute;
@@ -117,5 +112,12 @@ export default {
   padding: 5px 0;
   text-align: center;
   border-top: 1px solid rgba(0, 199, 255, 0.2);
+}
+
+/* 新增：绿色学术标签样式 */
+.academic-tag {
+  background: rgba(0, 255, 136, 0.1) !important;
+  color: #00ff88 !important;
+  border-top: 1px solid rgba(0, 255, 136, 0.2) !important;
 }
 </style>
