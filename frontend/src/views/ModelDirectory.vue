@@ -15,7 +15,7 @@
             <div class="card-footer-tag">GPU 实时渲染</div>
           </div>
 
-          <!-- 【新增入口】：红外高温计 -->
+          <!-- 红外高温计 -->
           <div class="model-entry-card" @click="goToPyrometer">
             <div class="card-content">
               <div class="icon-box">🌡️</div>
@@ -49,7 +49,6 @@ export default {
     goToPreview() {
       this.$router.push('/model/preview')
     },
-    // 【新增方法】跳转至高温计页面
     goToPyrometer() {
       this.$router.push('/model/pyrometer')
     }
@@ -59,20 +58,26 @@ export default {
 
 <style scoped>
 .layout { display: flex; min-height: 100vh; background-color: #05050a; }
-.main-content { margin-left: var(--sidebar-width); flex: 1; padding: 25px; }
+.main-content { margin-left: var(--sidebar-width); flex: 1; padding: 25px; transition: margin-left 0.3s ease; }
 .page-container { max-width: 1400px; margin: 0 auto; }
-.page-title { color: #fff; margin-bottom: 30px; font-weight: 300; font-size: 28px; border-bottom: 2px solid #00c7ff; padding-bottom: 10px; display: inline-block;}
+.page-title {
+  color: #fff;
+  margin-bottom: 30px;
+  font-weight: 300;
+  font-size: 28px;
+  border-bottom: 2px solid #00c7ff;
+  padding-bottom: 10px;
+  display: inline-block;
+}
 
 .directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
   margin-top: 20px;
 }
 
 .model-entry-card {
-  width: 320px;
-  height: 198px;
   background: linear-gradient(145deg, #161625, #11111d);
   border: 1px solid #2d2d44;
   border-radius: 12px;
@@ -84,6 +89,8 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  min-height: 180px;
+  padding-bottom: 30px;
 }
 
 .model-entry-card:hover {
@@ -114,10 +121,25 @@ export default {
   border-top: 1px solid rgba(0, 199, 255, 0.2);
 }
 
-/* 新增：绿色学术标签样式 */
 .academic-tag {
   background: rgba(0, 255, 136, 0.1) !important;
   color: #00ff88 !important;
   border-top: 1px solid rgba(0, 255, 136, 0.2) !important;
+}
+
+/* ━━━ 手机适配 ━━━ */
+@media (max-width: 768px) {
+  .main-content { margin-left: 60px; padding: 15px; }
+  .page-title { font-size: 20px; }
+  .directory-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .model-entry-card {
+    min-height: 140px;
+  }
+  .entry-title { font-size: 15px; }
+  .entry-desc { font-size: 12px; }
+  .icon-box { font-size: 28px; }
 }
 </style>

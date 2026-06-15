@@ -3,10 +3,9 @@
     <Sidebar />
     <main class="main-content">
       <div class="page-container">
-        <!-- 返回目录按钮 -->
         <div class="breadcrumb">
           <button @click="$router.push('/model')" class="btn-back">
-            <span class="icon">⬅</span> 返回模型目录
+            <span class="icon">⬅</span> <span class="btn-text">返回模型目录</span>
           </button>
         </div>
 
@@ -41,7 +40,7 @@
           <div class="card-footer">
             <div class="footer-grid">
               <div class="control-tip">操作：左键旋转 | 右键平移 | 滚轮缩放</div>
-              <div class="tech-tag">材质解析：工业级不锈钢 / 锗(Ge)镜头</div>
+              <div class="tech-tag">材质：工业级不锈钢 / 锗(Ge)镜头</div>
             </div>
           </div>
         </div>
@@ -65,7 +64,6 @@
 
           <!-- 2. 物理原理 & 3. 结构与应用 (黄金比例布局) -->
           <div class="golden-ratio-grid">
-            <!-- 原理部分 (61.8%) -->
             <div class="text-card primary-info">
               <h2 class="section-title">二、物理原理：黑体辐射定律</h2>
               <p class="content-p highlight-p">
@@ -91,7 +89,6 @@
               </div>
             </div>
 
-            <!-- 外观与注意事项 (38.2%) -->
             <div class="text-card secondary-info">
               <h2 class="section-title">三、结构与注意事项</h2>
               <h4 class="sub-title">外观结构</h4>
@@ -109,21 +106,21 @@
             </div>
           </div>
 
-          <!-- 4. 总结表：强制高亮度文字 -->
+          <!-- 4. 总结表 -->
           <div class="summary-section">
-             <div class="summary-table">
-               <div class="table-header">
-                 <span>项目名称</span>
-                 <span>详细内容详情</span>
-               </div>
-               <div class="table-body">
-                 <div class="table-row"><span>设备类型</span><span class="bright">红外高温计 (Infrared Pyrometer)</span></div>
-                 <div class="table-row"><span>测量方式</span><span class="bright">非接触式 (无需接触样品表面)</span></div>
-                 <div class="table-row"><span>测温精度</span><span class="bright">±1°C 左右 (视校准情况而定)</span></div>
-                 <div class="table-row"><span>温度量程</span><span class="bright">~300°C 至 2000°C</span></div>
-                 <div class="table-row"><span>应用场景</span><span class="bright">MBE 衬底温度原位监控与闭环控制</span></div>
-               </div>
-             </div>
+            <div class="summary-table">
+              <div class="table-header">
+                <span>项目名称</span>
+                <span>详细内容</span>
+              </div>
+              <div class="table-body">
+                <div class="table-row"><span>设备类型</span><span class="bright">红外高温计 (Infrared Pyrometer)</span></div>
+                <div class="table-row"><span>测量方式</span><span class="bright">非接触式</span></div>
+                <div class="table-row"><span>测温精度</span><span class="bright">±1°C 左右</span></div>
+                <div class="table-row"><span>温度量程</span><span class="bright">~300°C 至 2000°C</span></div>
+                <div class="table-row"><span>应用场景</span><span class="bright">MBE 衬底温度原位监控</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -172,13 +169,10 @@ export default {
       this.renderer.setSize(container.clientWidth, container.clientHeight);
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       this.renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-      // 保持高亮度曝光
       this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
       this.renderer.toneMappingExposure = 2.0;
       container.appendChild(this.renderer.domElement);
 
-      // 全方位灯光，确保无死角
       const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2.0);
       this.scene.add(hemiLight);
 
@@ -248,10 +242,9 @@ export default {
 
 <style scoped>
 .layout { display: flex; min-height: 100vh; background-color: #020205; }
-.main-content { margin-left: var(--sidebar-width); flex: 1; padding: 25px; transition: 0.3s; }
+.main-content { margin-left: var(--sidebar-width); flex: 1; padding: 25px; transition: margin-left 0.3s ease; }
 .page-container { max-width: 1400px; margin: 0 auto; }
 
-/* 按钮 */
 .btn-back {
   background: rgba(30, 30, 50, 0.9);
   border: 1px solid #444;
@@ -260,28 +253,47 @@ export default {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .btn-back:hover { border-color: #00c7ff; background: rgba(0, 199, 255, 0.1); }
 
 .page-title { color: #ffffff; margin: 20px 0; font-weight: 300; }
 
-/* 卡片 */
 .model-card { background: #11111d; border: 1px solid #333; border-radius: 12px; overflow: hidden; margin-bottom: 30px; }
-.card-header { padding: 15px 25px; background: #1a1a2e; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
-.header-left h3 { color: #ffffff; }
+.card-header { padding: 15px 25px; background: #1a1a2e; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.header-left { display: flex; align-items: center; gap: 10px; }
+.header-left h3 { color: #ffffff; font-size: 16px; margin: 0; }
+.status-badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: #00c853; color: #fff; white-space: nowrap; }
+.loading-status { background: #ff9100; animation: pulse 1.5s infinite; }
 
 .three-container { width: 100%; height: 500px; background: #0a0a12; position: relative; }
 
-/* 学术文字部分：对比度增强 */
+.loader-overlay { position: absolute; inset: 0; background: #0a0a12; display: flex; justify-content: center; align-items: center; z-index: 100; }
+.loading-box { width: 320px; max-width: 90%; text-align: center; }
+.spinner-modern { width: 45px; height: 45px; border: 3px solid rgba(0, 199, 255, 0.1); border-top: 3px solid #00c7ff; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+.progress-wrapper { width: 100%; height: 4px; background: #1f1f35; border-radius: 2px; margin-bottom: 15px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #00c7ff, #0078ff); transition: width 0.3s ease; }
+.loading-text { color: #8888a0; font-size: 13px; }
+
+.card-footer { padding: 12px 25px; background: #1a1a2e; border-top: 1px solid #333; }
+.footer-grid { display: flex; justify-content: space-between; color: #6a6a85; font-size: 12px; flex-wrap: wrap; gap: 8px; }
+
+.btn-mini { background: transparent; border: 1px solid #444466; color: #aaaabf; padding: 5px 12px; border-radius: 4px; cursor: pointer; }
+
+/* 学术文字部分 */
 .academic-container { display: flex; flex-direction: column; gap: 20px; }
 .text-card { background: #161625; border: 1px solid #333; border-radius: 12px; padding: 30px; color: #ffffff; }
 
 .section-title { color: #00c7ff; font-size: 22px; margin-bottom: 20px; border-left: 4px solid #00c7ff; padding-left: 15px; }
+.sub-title { color: #00c7ff; font-size: 16px; margin: 15px 0 10px; }
+.mt-20 { margin-top: 20px; }
 
 .content-p { color: #e0e0e0; font-size: 16px; line-height: 1.8; margin-bottom: 15px; }
 .highlight-p { color: #ffffff; font-weight: 500; }
 
-.device-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.device-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; }
 .device-item { background: #0a0a16; padding: 15px; border-radius: 8px; border: 1px solid #333; color: #a0a0a0; font-size: 14px; }
 .device-item.highlighted { border-color: #00ff88; color: #00ff88; background: rgba(0, 255, 136, 0.05); }
 
@@ -290,7 +302,7 @@ export default {
 .secondary-info { flex: 1; }
 
 .logic-list { margin: 25px 0; }
-.logic-item { display: flex; gap: 20px; margin-bottom: 18px; align-items: flex-start; }
+.logic-item { display: flex; gap: 15px; margin-bottom: 18px; align-items: flex-start; }
 .logic-num { background: #00c7ff; color: #000; font-weight: bold; width: 28px; height: 28px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
 .logic-content { color: #ffffff; font-size: 15px; line-height: 1.6; }
 
@@ -303,16 +315,51 @@ export default {
 .academic-list li::before { content: '▪'; color: #00c7ff; position: absolute; left: 0; }
 .academic-list.warning li::before { color: #ff9100; }
 
-/* 总结表格：彻底解决阅读问题 */
 .summary-table { background: #1a1a2e; border: 1px solid #444; border-radius: 12px; overflow: hidden; }
-.table-header { display: flex; background: #00c7ff; color: #000; font-weight: bold; padding: 15px 30px; }
+.table-header { display: flex; background: #00c7ff; color: #000; font-weight: bold; padding: 15px 20px; }
 .table-header span, .table-row span { flex: 1; }
-.table-row { display: flex; padding: 15px 30px; border-bottom: 1px solid #333; font-size: 15px; color: #00c7ff; }
+.table-body {}
+.table-row { display: flex; padding: 15px 20px; border-bottom: 1px solid #333; font-size: 15px; color: #00c7ff; }
 .table-row .bright { color: #ffffff !important; }
 
-@media (max-width: 1024px) {
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+/* ━━━ 手机适配 ━━━ */
+@media (max-width: 768px) {
+  .main-content { margin-left: 60px; padding: 12px; }
+  .page-title { font-size: 18px; }
+  .three-container { height: 280px; }
+  .card-header { padding: 10px 12px; }
+  .header-left h3 { font-size: 12px; }
+  .card-footer { padding: 8px 12px; }
+  .footer-grid { flex-direction: column; }
+  .btn-back { padding: 8px 12px; font-size: 12px; }
+  .btn-text { display: none; }
+
+  .text-card { padding: 18px 14px; }
+  .section-title { font-size: 17px; padding-left: 10px; }
+  .content-p { font-size: 14px; }
+  .device-grid { grid-template-columns: 1fr; gap: 10px; }
+  .device-item { padding: 12px; font-size: 13px; }
+
   .golden-ratio-grid { flex-direction: column; }
-  .device-grid { grid-template-columns: 1fr; }
-  .main-content { margin-left: 70px; }
+  .primary-info { flex: unset; }
+  .secondary-info { flex: unset; }
+
+  .logic-content { font-size: 13px; }
+  .formula-box code { font-size: 18px; }
+  .formula-box { padding: 15px; }
+
+  .academic-list li { font-size: 13px; }
+
+  .table-header { padding: 12px 14px; font-size: 13px; }
+  .table-row { padding: 12px 14px; font-size: 13px; flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .three-container { height: 220px; }
+  .page-title { font-size: 16px; }
+  .section-title { font-size: 15px; }
 }
 </style>

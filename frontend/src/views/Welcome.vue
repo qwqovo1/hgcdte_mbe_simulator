@@ -39,6 +39,7 @@ export default {
 .welcome-content {
   text-align: center;
   z-index: 10;
+  padding: 20px;
 }
 
 .welcome-title {
@@ -88,19 +89,14 @@ export default {
     transform: translateY(100vh) rotate(0deg);
     opacity: 0;
   }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
   100% {
     transform: translateY(-100vh) rotate(720deg);
     opacity: 0;
   }
 }
 
-/* 为每个粒子设置不同的位置和动画延迟 */
 .particle:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 12s; }
 .particle:nth-child(2) { left: 10%; animation-delay: 1s; animation-duration: 14s; }
 .particle:nth-child(3) { left: 15%; animation-delay: 2s; animation-duration: 11s; }
@@ -121,4 +117,27 @@ export default {
 .particle:nth-child(18) { left: 90%; animation-delay: 3.8s; animation-duration: 15s; }
 .particle:nth-child(19) { left: 93%; animation-delay: 0.9s; animation-duration: 12s; }
 .particle:nth-child(20) { left: 97%; animation-delay: 2.6s; animation-duration: 14s; }
+
+/* ━━━ 手机适配 ━━━ */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 22px;
+    line-height: 1.4;
+    padding: 0 10px;
+  }
+  .welcome-subtitle {
+    font-size: 13px;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+    padding: 0 10px;
+  }
+  .enter-btn {
+    padding: 12px 36px;
+    font-size: 16px;
+  }
+  .particle {
+    width: 4px;
+    height: 4px;
+  }
+}
 </style>

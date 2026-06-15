@@ -1,10 +1,11 @@
 """
-API路由模块
+API 基础路由模块
 """
 
 from fastapi import APIRouter
 
 router = APIRouter()
+
 
 @router.get("/info")
 async def get_project_info():
@@ -17,9 +18,11 @@ async def get_project_info():
             "实时工艺参数监控",
             "薄膜生长过程仿真",
             "AI辅助工艺优化",
-            "三维可视化展示"
-        ]
+            "三维可视化展示",
+            "论文佐证检索",
+        ],
     }
+
 
 @router.get("/health")
 async def health_check():

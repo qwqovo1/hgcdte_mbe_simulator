@@ -8,6 +8,8 @@ const ModelDisplay = () => import('../views/ModelDisplay.vue')
 // 【新增】红外高温计展示组件
 const PyrometerDisplay = () => import('../views/PyrometerDisplay.vue')
 const Experiment = () => import('../views/Experiment.vue')
+// 【新增】智能分析和建议组件
+const Analysis = () => import('../views/Analysis.vue')
 // 实验报告相关组件
 const ReportDirectory = () => import('../views/ReportDirectory.vue')
 const ReportManager = () => import('../views/ReportManager.vue')
@@ -43,6 +45,12 @@ const routes = [
     path: '/experiment',
     name: 'Experiment',
     component: Experiment
+  },
+  // 【新增】智能分析和建议功能路由
+  {
+    path: '/analysis',
+    name: 'Analysis',
+    component: Analysis
   },
   // 实验报告功能路由
   {
